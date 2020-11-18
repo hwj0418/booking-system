@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class navigation extends Component {
+export default class Navigation extends Component {
   render() {
     return (
       <div> this is navigation </div>
