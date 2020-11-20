@@ -6,10 +6,14 @@ var logger = require('morgan');
 var cors = require("cors");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var membershipRouter = require('./routes/membership');
 var testAPIRouter = require("./routes/testAPI");
 
 var app = express();
+
+app.listen(process.env.PORT || '9000', () => {
+  console.log(`server running on port: ${process.env.PORT || '9000'}`);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/membership', membershipRouter);
 app.use("/testAPI", testAPIRouter);
 
 // catch 404 and forward to error handler
