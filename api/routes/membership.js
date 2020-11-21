@@ -1,6 +1,6 @@
 "use strict";
 var express = require("express");
-const db = require("../db/membership");
+const memberships = require("../db/membership");
 var router = express.Router();
 
 const Membership = function (phone, firstname, lastname, gender) {
@@ -12,7 +12,7 @@ const Membership = function (phone, firstname, lastname, gender) {
 
 router.get("/", async (req, res, next) => {
   try {
-    let result = await db.all();
+    let result = await memberships.all();
     res.json(result);
   } catch (err) {
     console.log(err);
@@ -22,7 +22,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:phone", async (req, res, next) => {
   try {
-    let result = await db.one(req.params.phone);
+    let result = await memberships.one(req.params.phone);
     res.json(result);
   } catch (err) {
     console.log(err);
@@ -40,9 +40,9 @@ router.post("/new-member", async (req, res, next) => {
   );
   console.log("sending new member:", new_member);
   try {
-    let matching_member = await db.one(req.body.phone);
+    let matching_member = await memberships.one(req.body.phone);
     if (!matching_member) {
-      let result = await db.new_member(new_member);
+      let result = await memberships.new_member(new_member);
       res.send(result);
     } else {
       console.error(
@@ -59,7 +59,7 @@ router.post("/new-member", async (req, res, next) => {
 
 router.put("/update-member", async (req, res, next) => {
   try {
-    let matching_member = await db.one(req.body.phone);
+    let matching_member = await memberships.one(req.body.phone);
     if (matching_member) {
       let updated_member = new Membership(
         req.body.new_phone || req.body.phone,
@@ -72,7 +72,7 @@ router.put("/update-member", async (req, res, next) => {
         req.body.phone,
         updated_member
       );
-      let result = await db.update_member(updated_member, req.body.phone);
+      let result = await memberships.update_member(updated_member, req.body.phone);
       res.send(result);
     } else {
       console.error(
@@ -89,9 +89,9 @@ router.put("/update-member", async (req, res, next) => {
 
 router.put("/deposit-store-credit", async (req, res, next) => {
 	try {
-    let matching_member = await db.one(req.body.phone);
+    let matching_member = await memberships.one(req.body.phone);
     if (matching_member) {
-      let result = await db.deposit_store_credit(req.body.phone, req.body.store_credit);
+      let result = await memberships.deposit_store_credit(req.body.phone, req.body.store_credit);
       res.send(result);
     } else {
       console.error(
@@ -108,9 +108,9 @@ router.put("/deposit-store-credit", async (req, res, next) => {
 
 router.put("/use-store-credit", async (req, res, next) => {
 	try {
-    let matching_member = await db.one(req.body.phone);
+    let matching_member = await memberships.one(req.body.phone);
     if (matching_member) {
-      let result = await db.use_store_credit(req.body.phone, req.body.store_credit);
+      let result = await memberships.use_store_credit(req.body.phone, req.body.store_credit);
       res.send(result);
     } else {
       console.error(
@@ -127,9 +127,9 @@ router.put("/use-store-credit", async (req, res, next) => {
 
 router.put("/deposit-insurance-credit", async (req, res, next) => {
 	try {
-    let matching_member = await db.one(req.body.phone);
+    let matching_member = await memberships.one(req.body.phone);
     if (matching_member) {
-      let result = await db.deposit_insurance_credit(req.body.phone, req.body.insurance_credit);
+      let result = await memberships.deposit_insurance_credit(req.body.phone, req.body.insurance_credit);
       res.send(result);
     } else {
       console.error(
@@ -146,9 +146,9 @@ router.put("/deposit-insurance-credit", async (req, res, next) => {
 
 router.put("/use-insurance-credit", async (req, res, next) => {
 	try {
-    let matching_member = await db.one(req.body.phone);
+    let matching_member = await memberships.one(req.body.phone);
     if (matching_member) {
-      let result = await db.use_insurance_credit(req.body.phone, req.body.insurance_credit);
+      let result = await memberships.use_insurance_credit(req.body.phone, req.body.insurance_credit);
       res.send(result);
     } else {
       console.error(

@@ -7,7 +7,7 @@ var cors = require("cors");
 
 var indexRouter = require('./routes/index');
 var membershipRouter = require('./routes/membership');
-var testAPIRouter = require("./routes/testAPI");
+var staffRouter = require("./routes/staff");
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/', indexRouter);
 app.use('/membership', membershipRouter);
-app.use("/testAPI", testAPIRouter);
+app.use("/staff", staffRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

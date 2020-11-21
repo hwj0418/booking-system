@@ -21,9 +21,36 @@ staff_db.all = () => {
   });
 };
 
-staff_db.one = (id) => {
+staff_db.all_therapist = () => {
   return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM staff WHERE id =? ", phone, (err, results) => {
+    pool.query("SELECT * FROM staff WHERE title='therapist'", (err, results) => {
+      if (err) return reject(err);
+      return resolve(results);
+    });
+  });
+};
+
+staff_db.all_reception = () => {
+  return new Promise((resolve, reject) => {
+    pool.query("SELECT * FROM staff WHERE title='reception'", (err, results) => {
+      if (err) return reject(err);
+      return resolve(results);
+    });
+  })
+};
+
+staff_db.all_manager = () => {
+  return new Promise((resolve, reject) => {
+    pool.query("SELECT * FROM staff WHERE title='manager'", (err, results) => {
+      if (err) return reject(err);
+      return resolve(results);
+    });
+  });
+};
+
+staff_db.one = (phone) => {
+  return new Promise((resolve, reject) => {
+    pool.query("SELECT * FROM staff WHERE phone =? ", phone, (err, results) => {
       if (err) return reject(err);
       return resolve(results[0]);
     });
@@ -40,22 +67,22 @@ staff_db.new_staff = (staff) => {
   });
 };
 
-staff_db.delete = (id) => {
+staff_db.delete = (phone) => {
   return new Promise((resolve, reject) => {
-    pool.query("DELETE FROM staff WHERE id=?", id, (err, results) => {
+    pool.query("DELETE FROM staff WHERE phone=?", phone, (err, results) => {
       if (err) return reject(err);
-      return resolve(results[0]);
+      return resolve(results);
     });
   });
 };
 
-staff_db.update_staff = (staff, id) => {
+staff_db.update_staff = (staff, phone) => {
   return new Promise((resolve, reject) => {
-    pool.query("UPDATE staff SET ? WHERE id=?", [staff, id], (err, results) => {
+    pool.query("UPDATE staff SET ? WHERE phone=?", [staff, phone], (err, results) => {
       if (err) return reject(err);
-      return resolve(results[0]);
+      return resolve(results);
     });
   });
 };
 
-module.exports = staffs_db;
+module.exports = staff_db;
