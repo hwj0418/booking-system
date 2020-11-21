@@ -10,6 +10,8 @@ var membershipRouter = require('./routes/membership');
 var testAPIRouter = require("./routes/testAPI");
 
 var app = express();
+var bodyParser = require('body-parser');
+
 
 app.listen(process.env.PORT || '9000', () => {
   console.log(`server running on port: ${process.env.PORT || '9000'}`);
@@ -25,6 +27,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/', indexRouter);
 app.use('/membership', membershipRouter);
