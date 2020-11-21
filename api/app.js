@@ -7,7 +7,8 @@ var cors = require("cors");
 
 var indexRouter = require('./routes/index');
 var membershipRouter = require('./routes/membership');
-var staffRouter = require("./routes/staff");
+var staffRouter = require('./routes/staff');
+var serviceRouter = require('./routes/service');
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -32,7 +33,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use('/', indexRouter);
 app.use('/membership', membershipRouter);
-app.use("/staff", staffRouter);
+app.use('/staff', staffRouter);
+app.use('/service', serviceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

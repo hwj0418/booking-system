@@ -3,14 +3,6 @@ var express = require("express");
 const staffs = require("../db/staff");
 var router = express.Router();
 
-const Staff = function (firstname, lastname, gender, title, phone) {
-  this.phone = phone;
-  this.title = title;
-  this.firstname = firstname;
-  this.lastname = lastname;
-  this.gender = gender;
-};
-
 router.get("/", async (req, res, next) => {
   try {
     let result = await staffs.all();
