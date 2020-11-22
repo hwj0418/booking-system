@@ -9,6 +9,9 @@ var indexRouter = require('./routes/index');
 var membershipRouter = require('./routes/membership');
 var staffRouter = require('./routes/staff');
 var serviceRouter = require('./routes/service');
+var customerRouter = require('./routes/customer');
+var bookingRouter = require('./routes/booking');
+
 
 var app = express();
 var bodyParser = require('body-parser');
@@ -35,6 +38,8 @@ app.use('/', indexRouter);
 app.use('/membership', membershipRouter);
 app.use('/staff', staffRouter);
 app.use('/service', serviceRouter);
+app.use('/customer', customerRouter);
+app.use('/booking', bookingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

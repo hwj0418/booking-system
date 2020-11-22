@@ -91,4 +91,14 @@ router.put("/update-service", async (req, res, next) => {
   }
 });
 
+
+router.delete("/delete", async (req, res, next) => {
+  try {
+    let result = await services.delete(req.body.name, req.body.time_length);
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
 module.exports = router;

@@ -13,6 +13,18 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:phone", async (req, res, next) => {
+  try {
+		let result = await staffs.one(req.params.phone);
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+
+
 router.get("/therapist", async (req, res, next) => {
   try {
     let result = await staffs.all_therapist();
@@ -44,15 +56,7 @@ router.get("/manager", async (req, res, next) => {
 });
 
 
-router.get("/:phone", async (req, res, next) => {
-  try {
-		let result = await staffs.one(req.params.phone);
-    res.json(result);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(500);
-  }
-});
+
 
 router.post("/new-staff", async (req, res, next) => {
   console.log("Creating new staff", req.body);
@@ -103,6 +107,16 @@ router.put("/update-staff", async (req, res, next) => {
       );
       res.sendStatus(403);
     }
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
+router.delete("/:phone", async (req, res, next) => {
+  try {
+		let result = await staffs.delete(req.params.phone);
+    res.json(result);
   } catch (err) {
     console.log(err);
     res.sendStatus(500);

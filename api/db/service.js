@@ -30,12 +30,16 @@ service_db.one = (id) => {
   });
 };
 
-service_db.find = (name, time_length=45) => {
+service_db.find = (name, time_length = 45) => {
   return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM service WHERE name=? AND time_length=?", [name, time_length], (err, results) => {
-      if (err) return reject(err);
-      return resolve(results[0]);
-    });
+    pool.query(
+      "SELECT * FROM service WHERE name=? AND time_length=?",
+      [name, time_length],
+      (err, results) => {
+        if (err) return reject(err);
+        return resolve(results[0]);
+      }
+    );
   });
 };
 
@@ -49,23 +53,16 @@ service_db.new_service = (service) => {
   });
 };
 
-service_db.delete = (id, name, time_length) => {
+service_db.delete = (name, time_length) => {
   return new Promise((resolve, reject) => {
-    if (id) {
-      pool.query("DELETE FROM service WHERE id=?", id, (err, results) => {
+    pool.query(
+      "DELETE FROM service WHERE name=? AND time_length=?",
+      [name, time_length],
+      (err, results) => {
         if (err) return reject(err);
-        return resolve(results);
-      });
-    } else {
-      pool.query(
-        "DELETE FROM service WHERE name=? AND time_length=?",
-        [name, time_length],
-        (err, results) => {
-          if (err) return reject(err);
-          return resolve([name, time_length]);
-        }
-      );
-    }
+        return resolve([name, time_length]+" deleted");
+      }
+    );
   });
 };
 

@@ -30,6 +30,16 @@ router.get("/:phone", async (req, res, next) => {
   }
 });
 
+router.delete("/:phone", async (req, res, next) => {
+  try {
+    let result = await memberships.delete(req.params.phone);
+    res.json(result);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+});
+
 router.post("/new-member", async (req, res, next) => {
   console.log("Creating membership registration for:", req.body);
   let new_member = new Membership(
