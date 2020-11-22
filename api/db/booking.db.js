@@ -33,3 +33,5 @@ booking_db.one = (phone) => {
     );
   });
 };
+
+module.exports = booking_db;

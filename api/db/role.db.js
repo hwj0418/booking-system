@@ -61,3 +61,6 @@ role_db.update_role = (role, title) => {
     );
   });
 };
+
+
+module.exports = role_db;
