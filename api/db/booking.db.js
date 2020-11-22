@@ -14,17 +14,17 @@ let booking_db = {};
 
 booking_db.all = () => {
   return new Promise((resolve, reject) => {
-    pool.query("SELECT * FROM membership", (err, results) => {
+    pool.query("SELECT * FROM booking", (err, results) => {
       if (err) return reject(err);
       return resolve(results);
     });
   });
 };
 
-booking_db.one = (id) => {
+booking_db.one = (phone) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      "SELECT * FROM membership WHERE id =? ",
+      "SELECT * FROM booking WHERE phone =? ",
       phone,
       (err, results) => {
         if (err) return reject(err);

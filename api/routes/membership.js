@@ -1,6 +1,6 @@
 "use strict";
 var express = require("express");
-const memberships = require("../db/membership");
+const memberships = require("../db/membership.db");
 var router = express.Router();
 
 const Membership = function (phone, firstname, lastname, gender) {

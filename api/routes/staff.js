@@ -1,6 +1,6 @@
 "use strict";
 var express = require("express");
-const staffs = require("../db/staff");
+const staffs = require("../db/staff.db");
 var router = express.Router();
 
 router.get("/", async (req, res, next) => {
