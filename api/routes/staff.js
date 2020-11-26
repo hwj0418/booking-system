@@ -55,10 +55,7 @@ router.get("/manager", async (req, res, next) => {
   }
 });
 
-
-
-
-router.post("/new-staff", async (req, res, next) => {
+router.post("/new", async (req, res, next) => {
   console.log("Creating new staff", req.body);
   try {
     let matching_staff = await staffs.one(req.body.phone);
@@ -86,7 +83,7 @@ router.post("/new-staff", async (req, res, next) => {
   }
 });
 
-router.put("/update-staff", async (req, res, next) => {
+router.put("/update", async (req, res, next) => {
   try {
     let matching_staff = await staffs.one(req.body.phone);
     if (matching_staff) {
