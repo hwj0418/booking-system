@@ -4,7 +4,7 @@ const visits = require("../db/visit.db");
 var router = express.Router();
 var datetime = new Date();
 
-const Visit = function (phone, firstname, lastname,gender, therapist, note) {
+const Visit = function (phone, firstname, lastname, gender, therapist, note) {
   this.phone = phone;
   this.firstname = firstname;
   this.lastname = lastname;
