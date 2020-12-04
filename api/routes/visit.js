@@ -1,6 +1,7 @@
 "use strict";
 var express = require("express");
 const visits = require("../db/visit.db");
+const {visitValidation} = require("../validation");
 var router = express.Router();
 var datetime = new Date();
 
@@ -34,6 +35,8 @@ router.get("/:phone", async (req, res, next) => {
 });
 
 router.post("/new", async (req, res, next) => {
+  const {error} = visitValidation(req.body);
+  if(error) return res.status(400).send(error.details[0].message);
   console.log("Creating new visit", req.body);
   try {
     let matching_visit = await visits.one(req.body.phone, datetime.getDate());
